@@ -4,8 +4,9 @@ Programming Training Leads:
 - Thomas Trimble
 - Joseph Neamati
 
-Progaming Trainees;
-
-
-
-- Reese Pavolotsky;
+Programming Trainees:
+- Steven Sah
+- Charles Zhong
+- Reece Pavolotsky
+- Jake Hu
+- Kaitlyn Zee
