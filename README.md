@@ -5,9 +5,8 @@ Programming Training Leads:
 - Joseph Neamati
 
 Programming Trainees:
-
-
-
-
-
-- Kaitlyn Zee;
+- Steven Sah
+- Charles Zhong
+- Reece Pavolotsky
+- Jake Hu
+- Kaitlyn Zee
