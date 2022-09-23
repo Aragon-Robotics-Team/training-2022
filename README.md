@@ -6,3 +6,7 @@ Programming Training Leads:
 
 Programming Trainees:
 - Steven Sah
+- Charles Zhong
+- Reece Pavolotsky
+- Jake Hu
+- Kaitlyn Zee
