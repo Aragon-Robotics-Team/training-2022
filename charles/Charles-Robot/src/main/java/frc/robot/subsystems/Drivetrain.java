@@ -29,6 +29,8 @@ public class Drivetrain extends SubsystemBase {
   private WPI_TalonFX m_leftSecondaryMotor = new WPI_TalonFX(Config.kLeftSecondaryMotorID);
 
   public Drivetrain() {
+
+    // making secondary motors follow primary motors
     m_rightSecondaryMotor.follow(m_rightPrimaryMotor);
     m_leftSecondaryMotor.follow(m_leftPrimaryMotor);
     m_rightPrimaryMotor.setInverted(true);
@@ -36,16 +38,19 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void setRightSpeed(double speed){
+    //setting speed for right primary motor
     m_rightPrimaryMotor.set(speed);
   }
   public void setLeftSpeed(double speed){
+    //setting speed for left primary motor
     m_leftPrimaryMotor.set(speed);
   }
-  public void setIdleMode(NeutralMode d){
-    m_rightPrimaryMotor.setNeutralMode(d);
-    m_rightSecondaryMotor.setNeutralMode(d);
-    m_leftSecondaryMotor.setNeutralMode(d);
-    m_leftPrimaryMotor.setNeutralMode(d);
+  public void setIdleMode(NeutralMode mode){
+    //setting neutralMode 
+    m_rightPrimaryMotor.setNeutralMode(mode);
+    m_rightSecondaryMotor.setNeutralMode(mode);
+    m_leftSecondaryMotor.setNeutralMode(mode);
+    m_leftPrimaryMotor.setNeutralMode(mode);
   }
   
 
