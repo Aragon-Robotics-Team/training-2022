@@ -8,5 +8,5 @@ Programming Trainees:
 Steven Sah
 Charles Zhong
 Reece Pavolotsky
-Big Daddy Jake Hu 
+Jake Hu 
 Kaitlyn Zee
