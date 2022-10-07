@@ -11,8 +11,10 @@ import frc.robot.subsystems.Drivetrain;
 
 public class ArcadeDrive extends CommandBase {
   private static final class Config {
-    public static final int k_rightStickY = 0;
+    public static final int k_leftStickY = 0;
     public static final int k_rightStickX = 0;
+    public static final double kSpeedMutliplier = 0.7;
+    public static final double kTurnMutliplier = 0.7;
   }
 
   private Drivetrain m_drivetrain;
@@ -31,11 +33,44 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    double turn = m_joystick.getRawAxis(Config.k_rightStickX) * Config.kTurnMutliplier; 
+
+    // Turn made
+
+    double speed = m_joystick.getRawAxis(Config.k_leftStickY) * Config.kSpeedMutliplier; 
+
+    // Speed Made
+
+    double left = speed + turn;
+
+    //Left speed
+
+    double right = speed - turn;
+
+    //Right speed
+
+    m_drivetrain.setRightSpeed(right); 
+
+    //Setting right speed
+
+    m_drivetrain.setLeftSpeed(left);
+
+    //Setting left speed
+  
+    // Made Speed and Turn Multipliers
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+
+    //set right speed to 0 when finished
+
+    m_drivetrain.setRightSpeed(0);
+
+    // set left speed to 0 when finished
+
+    m_drivetrain.setLeftSpeed(0);
   }
 
   // Returns true when the command should end.
