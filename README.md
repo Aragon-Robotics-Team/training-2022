@@ -8,5 +8,5 @@ Programming Trainees:
 Steven Sah
 Charles Zhong
 Reece Pavolotsky
-Jake Hu
+Jake Hu ur mom
 Kaitlyn Zee
