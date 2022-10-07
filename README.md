@@ -8,5 +8,5 @@ Programming Trainees:
 Steven Sah
 Charles Zhong
 Reece Pavolotsky
-Jake Hu ur mom
+Big Daddy Jake Hu 
 Kaitlyn Zee
