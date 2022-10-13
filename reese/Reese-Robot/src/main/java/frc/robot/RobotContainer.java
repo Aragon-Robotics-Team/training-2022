@@ -5,10 +5,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.ArcadeDrive;
+import frc.robot.subsystems.Drivetrain;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -17,11 +18,13 @@ import edu.wpi.first.wpilibj2.command.Command;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
+  private static final class Config{
+    public static final int kjoystickID = 0;
+  }
+  // The robot's subsystems and commands are defined here..
+  private Joystick m_joyStick =  new Joystick(Config.kjoystickID);
+  private Drivetrain m_drivetrain = new Drivetrain();
+  private ArcadeDrive m_ArcadeDrive = new ArcadeDrive(m_drivetrain, m_joyStick);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -43,6 +46,11 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+  return null;
+  }
+  public Command getTeleopCommand() {
+    m_drivetrain.setDefaultCommand(m_ArcadeDrive);
+    return null;
   }
 }
+
