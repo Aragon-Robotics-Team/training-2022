@@ -15,12 +15,18 @@ public class ArcadeDrive extends CommandBase {
 
   private static final class Config {
 
+    //Constants should be diff. no.
     public static final int kLeftStickY = 0;
-    public static final int kRightStickX = 0;
+    public static final int kRightStickX = 1;
+  
+    public static final double kSpeedMultiplier = 0.7;
+    public static final double kTurnMultiplier = 0.7;
   }
 
   public ArcadeDrive(Drivetrain drivetrain, Joystick joystick) {
+
     // Use addRequirements() here to declare subsystem dependencies.
+
     m_drivetrain = drivetrain;
     addRequirements(drivetrain);
 
@@ -37,16 +43,30 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    double turn = m_joystick.getRawAxis(Config.kRightStickX)*Config.kTurnMultiplier;
+    double speed = m_joystick.getRawAxis(Config.kLeftStickY)*Config.kSpeedMultiplier;
+
+    double left = speed + turn;
+    double right = speed - turn;
+    
+    m_drivetrain.setRightSpeed(right);
+    m_drivetrain.setLeftSpeed(left);
+
+  }
+
+  // Returns true when the command should end.
+  // So bot doesn't stop running
+  @Override
+  public boolean isFinished() {
+    return false;
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    
+    m_drivetrain.setRightSpeed(0);
+    m_drivetrain.setLeftSpeed(0);
   }
 
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
-  }
 }

@@ -41,10 +41,12 @@ public class Drivetrain extends SubsystemBase {
 //Speed from -1 to 1, percentage of speed (full power forwards to backwards)
 public void setRightSpeed(double rightSpeed) {
      m_rightPrimary.set(rightSpeed);
+
    }
 
    public void setLeftSpeed(double leftSpeed) {
     m_leftPrimary.set(leftSpeed);
+    
   }
   //So robot stays put when engine is on
 
