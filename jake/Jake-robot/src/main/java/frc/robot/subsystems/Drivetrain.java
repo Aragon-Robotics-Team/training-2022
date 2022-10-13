@@ -4,6 +4,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -29,6 +30,22 @@ public class Drivetrain extends SubsystemBase {
   public Drivetrain() {
     m_leftSecondaryMotor.follow(m_leftPrimaryMotor);
     m_rightSecondaryMotor.follow(m_rightPrimaryMotor);
+    m_rightPrimaryMotor.setInverted(true);
+    m_rightSecondaryMotor.setInverted(true);
+  }
+
+  public void setRightSpeed(double speed){
+    m_rightPrimaryMotor.set(speed);
+  }
+  public void setLeftSpeed(double speed){
+    m_leftPrimaryMotor.set(speed);
+  }
+
+  public void setIdleMode(NeutralMode mode){
+    m_rightPrimaryMotor.setNeutralMode(mode);
+    m_rightSecondaryMotor.setNeutralMode(mode);
+    m_leftPrimaryMotor.setNeutralMode(mode);
+    m_leftSecondaryMotor.setNeutralMode(mode);
   }
 
   @Override
