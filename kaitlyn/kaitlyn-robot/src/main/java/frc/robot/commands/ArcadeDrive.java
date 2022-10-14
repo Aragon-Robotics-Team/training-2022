@@ -16,8 +16,8 @@ public class ArcadeDrive extends CommandBase {
   private static final class Config {
 
     //Constants should be diff. no.
-    public static final int kLeftStickY = 0;
-    public static final int kRightStickX = 1;
+    public static final int kLeftStickY = 1;
+    public static final int kRightStickX = 2;
   
     public static final double kSpeedMultiplier = 0.7;
     public static final double kTurnMultiplier = 0.7;

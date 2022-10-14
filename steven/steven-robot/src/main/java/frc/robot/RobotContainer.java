@@ -5,8 +5,11 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.commands.ArcadeDrive;
+import frc.robot.subsystems.Drivetrain;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -18,7 +21,15 @@ import edu.wpi.first.wpilibj2.command.Command;
  * subsystems, commands, and button mappings) should be declared here.
  */
 public class RobotContainer {
+  private static final class Config {
+    public static final int k_joystickId = 0;
+  }
+
   // The robot's subsystems and commands are defined here...
+  private Drivetrain m_drivetrain = new Drivetrain();
+  private Joystick m_joystick = new Joystick(Config.k_joystickId);
+  private ArcadeDrive m_arcadedrive = new ArcadeDrive(m_drivetrain, m_joystick);
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -38,12 +49,13 @@ public class RobotContainer {
   private void configureButtonBindings() {
   }
 
-  /**
-   * Use this to pass the autonomous command to the main {@link Robot} class.
-   *
-   * @return the command to run in autonomous
-   */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
+    return null;
+  }
+
+  public Command getTeleopCommand() {
+    m_drivetrain.setDefaultCommand(m_arcadedrive);
+    return null;
   }
 }
