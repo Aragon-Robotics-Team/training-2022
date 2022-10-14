@@ -22,6 +22,7 @@ public class RobotContainer {
   private static final class Config {
    public static final int kJoystickID = 0;
   }
+                                                                                                                                                  
   private Joystick m_joystick = new Joystick(Config.kJoystickID);
   private Drivetrain m_drivetrain = new Drivetrain();
   private ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_drivetrain, m_joystick);
