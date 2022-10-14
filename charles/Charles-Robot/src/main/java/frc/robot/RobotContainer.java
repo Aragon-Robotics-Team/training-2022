@@ -21,7 +21,7 @@ import frc.robot.subsystems.Drivetrain;
 public class RobotContainer {
 
   private static final class Config{
-     public static final int joystickID = 0;
+     public static final int kJoystickID = 0;
   
 
   }
@@ -29,7 +29,7 @@ public class RobotContainer {
  
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   private Drivetrain m_drivetrain = new Drivetrain();
-  private Joystick m_stick = new Joystick(Config.joystickID);
+  private Joystick m_stick = new Joystick(Config.kJoystickID);
   private ArcadeDrive m_ArcadeDrive= new ArcadeDrive(m_drivetrain, m_stick);
   public RobotContainer() {
     // Configure the button bindings
@@ -53,10 +53,10 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand(){
-
+    return null;
   }
   public Command getTeleopCommand(){
-    m_drivetrain.setDefaultCommand(ArcadeDrive);
+    m_drivetrain.setDefaultCommand(m_ArcadeDrive);
     return null;
   }
   
