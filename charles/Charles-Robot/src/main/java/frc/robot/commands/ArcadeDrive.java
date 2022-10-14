@@ -12,8 +12,8 @@ import frc.robot.subsystems.Drivetrain;
 public class ArcadeDrive extends CommandBase {
   private static final class Config {
     //declaring joystick constants
-    public static final int kleftStickY = 0;
-    public static final int kRightStickX = 0;
+    public static final int kleftStickY = 1;
+    public static final int kRightStickX = 2;
     public static final double kSpeedMultiplier = 0.7;
     public static final double kTurnMultiplier = 0.7;
 
