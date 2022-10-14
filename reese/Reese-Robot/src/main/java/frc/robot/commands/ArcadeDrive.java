@@ -11,8 +11,8 @@ import frc.robot.subsystems.Drivetrain;
 public class ArcadeDrive extends CommandBase {
   /** Creates a new ArcadeDrive. */
   private static final class Config {
-    public static final int kLeftStickYAxis = 0;
-    public static final int kRightStickYAxis = 1;
+    public static final int kLeftStickYAxis = 1;
+    public static final int kRightStickYAxis = 2;
     public static final double kSpeedMultiplier = 0.7;
     public static final double kTurnMultiplier= 0.7;
   }
