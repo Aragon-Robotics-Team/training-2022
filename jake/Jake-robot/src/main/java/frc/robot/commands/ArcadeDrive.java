@@ -11,10 +11,10 @@ import frc.robot.subsystems.Drivetrain;
 
 public class ArcadeDrive extends CommandBase {
   private static final class Config {
-    public static final int k_leftStickY = 0;
-    public static final int k_rightStickX = 0;
-    public static final double kSpeedMutliplier = 0.7;
-    public static final double kTurnMutliplier = 0.7;
+    public static final int k_leftStickY = 1;
+    public static final int k_rightStickX = 2;
+    public static final double kSpeedMutliplier = 1;
+    public static final double kTurnMutliplier = 1;
   }
 
   private Drivetrain m_drivetrain;
