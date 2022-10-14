@@ -13,8 +13,8 @@ public class ArcadeDrive extends CommandBase {
   private final static class Config {
     public static final double speedMultiplier = 0.7;
     public static final double turnMultiplier = 0.7;
-    public static final int leftStickY = 0;
-    public static final int rightStickX = 1;
+    public static final int leftStickY = 1;
+    public static final int rightStickX = 2;
   }
 
   public ArcadeDrive(Drivetrain drivetrain, Joystick joystick) {
