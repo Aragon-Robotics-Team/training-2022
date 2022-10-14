@@ -19,11 +19,11 @@ import frc.robot.subsystems.Drivetrain;
  */
 public class RobotContainer {
   private static final class Config{
-
+    public static final int kjoystickID = 0;
   }
   // The robot's subsystems and commands are defined here...
   private Drivetrain m_drivetrain = new Drivetrain();
-  private Joystick m_Joystick = new Joystick();
+  private Joystick m_Joystick = new Joystick(Config.kjoystickID);
   private ArcadeDrive m_ArcadeDrive = new ArcadeDrive(m_drivetrain, m_Joystick);
  
 
@@ -41,7 +41,9 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -49,6 +51,11 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+    return null;
+  }
 
+  public Command getTeleopCommand(){
+    m_drivetrain.setDefaultCommand(m_ArcadeDrive);
+    return null;
   }
 }
