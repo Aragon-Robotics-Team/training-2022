@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
@@ -10,6 +11,7 @@ public class ArcadeDrive extends CommandBase {
 
   private Joystick m_joystick;
 
+  // typical java
   private final static class Config {
     public static final double speedMultiplier = 0.7;
     public static final double turnMultiplier = 0.7;
@@ -43,6 +45,8 @@ public class ArcadeDrive extends CommandBase {
     double right = speed - turn;
     m_Drivetrain.setRightSpeed(right);
     m_Drivetrain.setLeftSpeed(left);
+    SmartDashboard.putNumber("leftspeed", left);
+    SmartDashboard.putNumber("rightspeed", right);
   }
 
   // Called once the command ends or is interrupted.
