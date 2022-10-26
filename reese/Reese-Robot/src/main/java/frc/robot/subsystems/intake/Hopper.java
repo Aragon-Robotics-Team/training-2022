@@ -20,7 +20,7 @@ public class Hopper extends SubsystemBase {
   public Hopper() {
     m_hopperMontor.setInverted(true);
   }
-  public void setFoward(){
+  public void setForward(){
 m_hopperMontor.set(Config.k_hopperSpeed);
   }
   public void setOff(){
@@ -30,8 +30,8 @@ m_hopperMontor.set(Config.k_hopperSpeed);
     m_hopperMontor.set(-Config.k_hopperSpeed);
   }
 
-  public InstantCommand HopperFoward(){
-    return new InstantCommand(this::setFoward, this);
+  public InstantCommand HopperForward(){
+    return new InstantCommand(this::setForward, this);
   }
   public InstantCommand HopperOff(){
     return new InstantCommand(this::setOff, this);
