@@ -21,6 +21,8 @@ public class IntakeArm extends SubsystemBase {
     public static final int karmchannel = 0;
   }
 
+  public static boolean getState;
+
   private CANSparkMax m_intakeMotor = new CANSparkMax(Config.kIntakeMotorID, MotorType.kBrushless);
   private Solenoid m_arm = new Solenoid(1, PneumaticsModuleType.CTREPCM , Config.karmchannel);
   public IntakeArm() {
@@ -56,12 +58,20 @@ public class IntakeArm extends SubsystemBase {
     m_arm.set(true);
   }
 
+  public InstantCommand armIn1(){
+    return new InstantCommand(this::armIn, this);
+  }
+
+  public InstantCommand armOut1(){
+    return new InstantCommand(this::armOut, this);
+  }
+
   public void armIn(){
     m_arm.set(false);
   }
 
   public boolean getState(){
-    return false;
+    return m_arm.get();
   }
   @Override
   public void periodic() {
