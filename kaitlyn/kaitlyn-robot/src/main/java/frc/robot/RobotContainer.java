@@ -8,8 +8,12 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.RunIntake;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.intake.Hopper;
+import frc.robot.subsystems.intake.IntakeArm;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -21,12 +25,23 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private static final class Config {
    public static final int kJoystickID = 0;
+   public static final int kIntakeArmInID = 1;
+   public static final int kIntakeArmOutID = 2;
+   public static final int kIntakeInID = 3;
+   public static final int kIntakeOutID = 4;
   }
                                                                                                                                                   
   private Joystick m_joystick = new Joystick(Config.kJoystickID);
   private Drivetrain m_drivetrain = new Drivetrain();
   private ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_drivetrain, m_joystick);
 
+  private IntakeArm m_intakeArm = new IntakeArm();
+  private Hopper m_hopper = new Hopper();
+  private JoystickButton m_intakeArmIn = new JoystickButton(m_joystick, Config.kIntakeArmInID);
+  private JoystickButton m_intakeArmOut = new JoystickButton(m_joystick, Config.kIntakeArmOutID);
+  private JoystickButton m_intakeIn = new JoystickButton(m_joystick, Config.kIntakeInID);
+  private JoystickButton m_intakeOut = new JoystickButton (m_joystick, Config.kIntakeOutID);
+  private RunIntake m_runIntake = new RunIntake(m_hopper, m_intakeArm, m_intakeIn, m_intakeOut);
   
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -43,7 +58,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    m_intakeArmIn.whenPressed(m_intakeArm.SolenoidArmIn());
+    m_intakeArmOut.whenPressed(m_intakeArm.SolenoidArmOut());
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

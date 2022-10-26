@@ -5,6 +5,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
@@ -42,7 +43,8 @@ public class ArcadeDrive extends CommandBase {
     double right = speed - turn;
     m_drivetrain.setrightPrimarySpeed(right);
     m_drivetrain.setleftPrimarySpeed(left);
-  
+  SmartDashboard.putNumber("left speed", left);
+  SmartDashboard.putNumber("right speed", right);
   }
 
 

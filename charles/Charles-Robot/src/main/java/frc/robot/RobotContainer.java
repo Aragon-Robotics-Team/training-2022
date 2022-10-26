@@ -9,8 +9,12 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.RunIntake;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.intake.Hopper;
+import frc.robot.subsystems.intake.IntakeArm;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -22,6 +26,13 @@ public class RobotContainer {
 
   private static final class Config{
      public static final int kJoystickID = 0;
+     public static final int kInButtonID = 8;
+     public static final int kOutButtonID = 9;
+     public static final int kIntakeInID = 10;
+     public static final int kIntakeOutID = 11;
+     public static final int kRunIntakeButtonID = 12;
+
+
   
 
   }
@@ -31,9 +42,17 @@ public class RobotContainer {
   private Drivetrain m_drivetrain = new Drivetrain();
   private Joystick m_stick = new Joystick(Config.kJoystickID);
   private ArcadeDrive m_ArcadeDrive= new ArcadeDrive(m_drivetrain, m_stick);
+  private Hopper m_hopper = new Hopper();
+  private IntakeArm m_intakeArm = new IntakeArm();
+  private JoystickButton m_intakeIn = new JoystickButton(m_stick, Config.kInButtonID);
+  private JoystickButton m_intakeOut = new JoystickButton(m_stick, Config.kOutButtonID);
+  private JoystickButton m_runIntake = new JoystickButton(m_stick, Config.kRunIntakeButtonID);
+  private JoystickButton m_armIn = new JoystickButton(m_stick, Config.kIntakeInID);
+  private JoystickButton m_armOut = new JoystickButton(m_stick, Config.kIntakeOutID);
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
+
    
   } 
 
@@ -45,7 +64,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    m_armIn.whenPressed(m_intakeArm.ArmIn());
+    m_armOut.whenPressed(m_intakeArm.ArmOut());
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
