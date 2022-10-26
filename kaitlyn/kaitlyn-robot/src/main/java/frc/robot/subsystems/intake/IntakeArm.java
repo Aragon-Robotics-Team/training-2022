@@ -71,7 +71,7 @@ public class IntakeArm extends SubsystemBase {
   }
 
   public void setArmIn(){
-    m_arm.set(false)
+    m_arm.set(false);
   }
 
   public boolean getState(){
