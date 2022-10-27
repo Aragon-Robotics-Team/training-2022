@@ -13,9 +13,9 @@ public class Drivetrain extends SubsystemBase {
   /** Creates a new Drivetrain. */ 
   private static final class Config{
     // Making IDs for motors
-    public static final int kRightPrimaryMotorID = 0;
-    public static final int kLeftPrimaryMotorID = 1;
-    public static final int kRightSecondaryMotorID = 2;
+    public static final int kRightPrimaryMotorID = 2;
+    public static final int kLeftPrimaryMotorID = 4;
+    public static final int kRightSecondaryMotorID = 1;
     public static final int kLeftSecondaryMotorID = 3;
   }
 
