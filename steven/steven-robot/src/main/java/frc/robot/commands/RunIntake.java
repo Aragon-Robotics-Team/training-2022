@@ -17,7 +17,7 @@ public class RunIntake extends CommandBase {
   private JoystickButton m_IntakeOut;
   public RunIntake(Hopper hopper, IntakeArm intake, JoystickButton intakeIn, JoystickButton intakeOut) {
     m_hopper = hopper;
-    m_IntakeArm = intake
+    m_IntakeArm = intake;
     m_IntakeIn = intakeIn;
     m_IntakeOut = intakeOut;
     addRequirements(hopper, intake);
@@ -37,8 +37,8 @@ public class RunIntake extends CommandBase {
   //    m_hopper.HopperForward();
   //  }
   //  else { m_hopper.HopperOff(); }
-      if(m_IntakeIn.get()) m_hopper.HopperForward(); m_IntakeArm.setForwardIntakeArmSpeed();
-      else if(m_IntakeOut.get()) m_hopper.HopperReverse(); m_IntakeArm.setForwardIntakeArmSpeed();  
+      if(m_IntakeIn.get()) {m_hopper.HopperForward(); m_IntakeArm.setForwardIntakeArmSpeed();}
+      else if(m_IntakeOut.get()) {m_hopper.HopperReverse(); m_IntakeArm.setForwardIntakeArmSpeed();}
       else { m_hopper.setZeroHopperSpeed(); m_IntakeArm.setZeroIntakeArmSpeed(); }
   }
 
