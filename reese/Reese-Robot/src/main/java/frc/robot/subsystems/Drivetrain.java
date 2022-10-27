@@ -12,10 +12,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Drivetrain extends SubsystemBase {
   /** Creates a new Drivetrain. **/
   private static final class Config {
-    public static final int krightPrimaryID = 0;
-    public static final int kleftPrimaryID = 1;
-    public static final int krightSecondID = 4;
-    public static final int kleftSecondID = 56;
+    public static final int krightPrimaryID = 4;
+    public static final int kleftPrimaryID = 2;
+    public static final int krightSecondID = 1;
+    public static final int kleftSecondID = 3;
   }
   
   // making motors IDs
