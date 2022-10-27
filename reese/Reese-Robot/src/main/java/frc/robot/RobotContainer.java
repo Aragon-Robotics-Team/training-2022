@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.RunIntake;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.intake.Hopper;
 import frc.robot.subsystems.intake.IntakeArm;
@@ -40,12 +41,12 @@ public class RobotContainer {
     configureButtonBindings();
   }
   private IntakeArm m_intakeArm = new IntakeArm();
-  private Hopper m_hopper = new Hopper();
+  private Hopper m_hopper = new Hopper(); // makes buttons
   private JoystickButton m_IntakeIn = new JoystickButton(m_joyStick, Config.kJoystickButtonIDIntakeIn);
   private JoystickButton m_IntakeOut = new JoystickButton(m_joyStick,Config.kJoystickButtonIDIntakeOut);
   private JoystickButton m_intakeArmOut = new JoystickButton(m_joyStick,Config.kJoystickButtonIDIntakeArmOut);
   private JoystickButton m_intakeArmIn = new JoystickButton(m_joyStick,Config.kJoystickButtonIDIntakeArmIn);
-
+  private RunIntake m_runintake = new RunIntake(m_intakeArm, m_hopper,m_IntakeIn, m_IntakeOut);
 
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
@@ -53,10 +54,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  // runs commands
+  // runs commands instantiates
   private void configureButtonBindings() {
-    m_IntakeIn.whenPressed(m_intakeArm.SolenoidArmIn());
-    m_IntakeOut.whenPressed(m_intakeArm.SolenoidArmOut());
+    m_intakeArmIn.whenPressed(m_intakeArm.SolenoidArmIn());
+    m_intakeArmOut.whenPressed(m_intakeArm.SolenoidArmOut());
   
   }
 
@@ -71,6 +72,7 @@ public class RobotContainer {
   }
   public Command getTeleopCommand() {
     m_drivetrain.setDefaultCommand(m_ArcadeDrive);
+    m_runintake.schedule();
     return null;
   }
 }
