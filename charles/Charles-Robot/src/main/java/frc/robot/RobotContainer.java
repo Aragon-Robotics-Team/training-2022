@@ -46,9 +46,9 @@ public class RobotContainer {
   private IntakeArm m_intakeArm = new IntakeArm();
   private JoystickButton m_intakeIn = new JoystickButton(m_stick, Config.kInButtonID);
   private JoystickButton m_intakeOut = new JoystickButton(m_stick, Config.kOutButtonID);
-  private JoystickButton m_runIntake = new JoystickButton(m_stick, Config.kRunIntakeButtonID);
   private JoystickButton m_armIn = new JoystickButton(m_stick, Config.kIntakeInID);
   private JoystickButton m_armOut = new JoystickButton(m_stick, Config.kIntakeOutID);
+  private RunIntake m_runIntake = new RunIntake(m_intakeArm, m_hopper, m_intakeIn, m_intakeOut);
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
@@ -79,7 +79,9 @@ public class RobotContainer {
   }
   public Command getTeleopCommand(){
     m_drivetrain.setDefaultCommand(m_ArcadeDrive);
+    m_runIntake.schedule();
     return null;
+   
   }
   
 }
