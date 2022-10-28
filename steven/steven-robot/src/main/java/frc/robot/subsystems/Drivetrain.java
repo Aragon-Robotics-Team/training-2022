@@ -7,10 +7,10 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
   private static final class Config{
-    public static final int kRightPrimaryID=96;
-    public static final int kLeftPrimaryID=69;
-    public static final int kRightSecondaryID=969;
-    public static final int kLeftSecondaryID=696;
+    public static final int kRightPrimaryID=2;
+    public static final int kLeftPrimaryID=4;
+    public static final int kRightSecondaryID=1;
+    public static final int kLeftSecondaryID=3;
   }
 
   private WPI_TalonFX m_rightPrimary = new WPI_TalonFX(Config.kRightPrimaryID);

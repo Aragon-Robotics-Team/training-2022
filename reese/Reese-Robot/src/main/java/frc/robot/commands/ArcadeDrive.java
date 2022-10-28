@@ -39,8 +39,8 @@ public class ArcadeDrive extends CommandBase {
   public void execute() {
     double speed = m_joyStick.getRawAxis(Config.kLeftStickYAxis) * Config.kSpeedMultiplier;
     double turn = m_joyStick.getRawAxis(Config.kRightStickYAxis) * Config.kTurnMultiplier;
-    double left = speed + turn;
-    double right = speed - turn;
+    double left = speed - turn;
+    double right = speed + turn;
     m_drivetrain.setrightPrimarySpeed(right);
     m_drivetrain.setleftPrimarySpeed(left);
   SmartDashboard.putNumber("left speed", left);
