@@ -12,7 +12,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.RunIntake;
+import frc.robot.commands.shooting.Launch;
+import frc.robot.commands.shooting.Reload;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.intake.Hopper;
 import frc.robot.subsystems.intake.IntakeArm;
 
@@ -26,11 +29,13 @@ public class RobotContainer {
 
   private static final class Config{
      public static final int kJoystickID = 0;
-     public static final int kInButtonID = 8;
-     public static final int kOutButtonID = 9;
+     public static final int kInButtonID = 1;
+     public static final int kOutButtonID = 2;
      public static final int kIntakeInID = 10;
-     public static final int kIntakeOutID = 11;
+     public static final int kIntakeOutID = 9;
      public static final int kRunIntakeButtonID = 12;
+     public static final int klaunchButtonID = 8;
+     public static final int kReloadButtonID = 7;
 
 
   
@@ -48,7 +53,12 @@ public class RobotContainer {
   private JoystickButton m_intakeOut = new JoystickButton(m_stick, Config.kOutButtonID);
   private JoystickButton m_armIn = new JoystickButton(m_stick, Config.kIntakeInID);
   private JoystickButton m_armOut = new JoystickButton(m_stick, Config.kIntakeOutID);
+  private JoystickButton m_launchButton = new JoystickButton(m_stick, Config.klaunchButtonID);
+  private JoystickButton m_reloadButton = new JoystickButton(m_stick, Config.kReloadButtonID); 
   private RunIntake m_runIntake = new RunIntake(m_intakeArm, m_hopper, m_intakeIn, m_intakeOut);
+  private Shooter m_shooter = new Shooter();
+  private Launch m_launch = new Launch(m_shooter);
+  private Reload m_reload = new Reload(m_shooter);
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
@@ -67,6 +77,8 @@ public class RobotContainer {
   private void configureButtonBindings() {
     m_armIn.whenPressed(m_intakeArm.ArmIn());
     m_armOut.whenPressed(m_intakeArm.ArmOut());
+    m_launchButton.whenPressed(m_launch);
+    m_reloadButton.whenPressed(m_reload);
   }
 
   /**
