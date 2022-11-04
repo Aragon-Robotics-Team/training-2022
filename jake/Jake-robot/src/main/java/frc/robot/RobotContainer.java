@@ -27,10 +27,10 @@ import frc.robot.subsystems.intake.IntakeArm;
 public class RobotContainer {
   private static final class Config{
     public static final int kjoystickID = 0;
-    public static final int kIntakeInID = 8;
-    public static final int kIntakeOutID = 7;
-    public static final int kArmInID = 3020984;
-    public static final int kArmOutID = 982;
+    public static final int kIntakeInID = 2;
+    public static final int kIntakeOutID = 1;
+    public static final int kArmInID = 4;
+    public static final int kArmOutID = 3;
     public static final int kLaunchID = 8;
     public static final int kReloadID = 7;
   }
@@ -69,6 +69,9 @@ public class RobotContainer {
   private void configureButtonBindings() {
     m_armin.whenPressed(m_intakeArm.armIn1());
     m_armOut.whenPressed(m_intakeArm.armOut1());
+
+    m_launchButton.whenPressed(m_launch);
+    m_reloadButton.whenPressed(m_reload);
   }
 
   /**
