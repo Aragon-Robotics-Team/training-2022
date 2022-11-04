@@ -11,7 +11,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.RunIntake;
+import frc.robot.commands.Shooting.Launch;
+import frc.robot.commands.Shooting.Reload;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.intake.Hopper;
 import frc.robot.subsystems.intake.IntakeArm;
 
@@ -28,6 +31,8 @@ public class RobotContainer {
     public static final int kIntakeOutID = 7;
     public static final int kArmInID = 3020984;
     public static final int kArmOutID = 982;
+    public static final int kLaunchID = 8;
+    public static final int kReloadID = 7;
   }
   // The robot's subsystems and commands are defined here...
   private Drivetrain m_drivetrain = new Drivetrain();
@@ -40,6 +45,11 @@ public class RobotContainer {
   private JoystickButton m_armin = new JoystickButton(m_Joystick, Config.kArmInID);
   private JoystickButton m_armOut = new JoystickButton(m_Joystick, Config.kArmOutID);
   private RunIntake m_runintake = new RunIntake(m_hopper, m_intakeArm, m_intakeIn, m_intakeOut);
+  private Shooter m_shooter = new Shooter();
+  private Launch m_launch = new Launch(m_shooter);
+  private Reload m_reload = new Reload(m_shooter);
+  private JoystickButton m_launchButton = new JoystickButton(m_Joystick, Config.kLaunchID);
+  private JoystickButton m_reloadButton = new JoystickButton(m_Joystick, Config.kReloadID);
 
 
 
