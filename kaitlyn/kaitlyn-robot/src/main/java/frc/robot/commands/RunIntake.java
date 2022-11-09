@@ -38,14 +38,17 @@ public class RunIntake extends CommandBase {
   @Override
   public void execute() {
     if(m_intakeIn.get()){
+      //If m_intakeIn is true, then it'll move forward
       m_intakeArm.setForward();
       m_hopper.setForward();
     }
     else if(m_intakeOut.get()){
+      //If m_intakeOut is true, then it'll move in reverse
       m_intakeArm.setReverse();
       m_hopper.setReverse();
     }
     else{
+      //Otherwise, it'll turn off
       m_intakeArm.setOff();
       m_hopper.setOff();
     }
