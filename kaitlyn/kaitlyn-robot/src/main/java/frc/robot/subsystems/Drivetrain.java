@@ -49,6 +49,7 @@ public void setRightSpeed(double rightSpeed) {
     
   }
   //So robot stays put when engine is on
+  //Switch bot between coast and brake mode
 
   public void setIdleMode(NeutralMode idleMode){
 

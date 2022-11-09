@@ -8,38 +8,36 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 public class Climb extends SubsystemBase {
-  /** Creates a new Climb. */
   private static final class Config{
-    public static final int kArmChannel = 0;
+    public static final int kClimbInID = 4;
+    public static final int kClimbOutID = 3;
+  }
+  // Climb function
+  private Solenoid m_climb = new Solenoid(1, PneumaticsModuleType.CTREPCM, 5);
+  // make climb
+  public void climbOut(){
+    m_climb.set(true);
   }
 
-  //Instantiate solenoid
-  private Solenoid m_climbArms = new Solenoid(1, PneumaticsModuleType.CTREPCM, Config.kArmChannel);
-  public Climb() {
+  public void climbIn(){
+    m_climb.set(false);
   }
-  
-  public InstantCommand SetArmOut(){
-    return new InstantCommand(this::armOut,this);
+  // setting cimb in or out
+
+  public InstantCommand climbIn1(){
+    return new InstantCommand(this::climbIn, this);
   }
 
-  public void armOut(){
-    m_climbArms.set(true);
+  public InstantCommand climbOut1(){
+    return new InstantCommand(this::climbOut, this);
   }
-
-  public InstantCommand SetArmIn(){
-    return new InstantCommand(this::armIn,this);
+  // returning instant commands
+  public boolean climbState(){
+    return m_climb.get();
   }
-
-  public void armIn(){
-    m_climbArms.set(false);
-  }
-
-  public boolean getState(){
-    return m_climbArms.get();
-  }
+  // getting state of climb
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
