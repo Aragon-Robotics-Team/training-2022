@@ -38,11 +38,13 @@ public class RobotContainer {
    public static final int kClimbInID = 4;
    public static final int kClimbOutID = 3;
   }
-                                                                                                                                                  
+  
+  //For Drivetrain subsystem
   private Joystick m_joystick = new Joystick(Config.kJoystickID);
   private Drivetrain m_drivetrain = new Drivetrain();
   private ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_drivetrain, m_joystick);
 
+  //For IntakeArm subsystem
   private IntakeArm m_intakeArm = new IntakeArm();
   private Hopper m_hopper = new Hopper();
   private JoystickButton m_intakeArmIn = new JoystickButton(m_joystick, Config.kIntakeArmInID);
@@ -51,12 +53,14 @@ public class RobotContainer {
   private JoystickButton m_intakeOut = new JoystickButton (m_joystick, Config.kIntakeOutID);
   private RunIntake m_runIntake = new RunIntake(m_hopper, m_intakeArm, m_intakeIn, m_intakeOut);
 
+  //For Shooter subsystem
   private Shooter m_shooter = new Shooter();
   private Launch m_launch = new Launch(m_shooter);
   private Reload m_reload = new Reload(m_shooter);
   private JoystickButton m_launchButton = new JoystickButton(m_joystick, Config.kLaunchButtonID);
   private JoystickButton m_reloadButton = new JoystickButton(m_joystick, Config.kReloadButtonID);
 
+  //For Climb subsystem
   private Climb m_climbArm = new Climb();
   private JoystickButton m_climbIn = new JoystickButton(m_joystick, Config.kClimbInID);
   private JoystickButton m_climbOut = new JoystickButton(m_joystick, Config.kClimbOutID);

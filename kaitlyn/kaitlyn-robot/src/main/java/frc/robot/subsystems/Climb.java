@@ -15,10 +15,12 @@ public class Climb extends SubsystemBase {
   private static final class Config{
     public static final int kArmChannel = 0;
   }
+
   //Instantiate solenoid
   private Solenoid m_climbArms = new Solenoid(1, PneumaticsModuleType.CTREPCM, Config.kArmChannel);
   public Climb() {
   }
+  
   public InstantCommand SetArmOut(){
     return new InstantCommand(this::armOut,this);
   }
