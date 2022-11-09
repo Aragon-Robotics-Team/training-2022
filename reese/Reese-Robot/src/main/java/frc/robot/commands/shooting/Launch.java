@@ -22,5 +22,6 @@ public class Launch extends InstantCommand {
   @Override
   public void initialize() {
     m_shooter.openServo();
+  
   }
 }
