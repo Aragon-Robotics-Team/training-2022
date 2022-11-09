@@ -9,6 +9,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.revrobotics.SparkMaxLimitSwitch.Type;
 
 import edu.wpi.first.wpilibj.Servo;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
@@ -31,10 +32,10 @@ public class Shooter extends SubsystemBase {
     m_shooterMotor.set(speed);
   }
   public void openServo(){
-    m_shooterMotor.set(0);
+    m_servo.set(0.0);
   }
   public void closeServo(){
-    m_shooterMotor.set(1.0);
+    m_servo.set(1.0);
   }
   public boolean getUpperLimit(){
     return m_shooterMotor.getReverseLimitSwitch(Type.kNormallyClosed).isPressed();
@@ -47,5 +48,7 @@ public class Shooter extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    SmartDashboard.putBoolean("shooter/upperLimit", getUpperLimit());
+    SmartDashboard.putBoolean("shooter/lowerLimit", getLowerLimit());
   }
 }

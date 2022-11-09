@@ -9,7 +9,7 @@ import frc.robot.subsystems.Shooter;
 
 public class Draw extends CommandBase {
   /** Creates a new Draw. */
-  public final Shooter m_shooter;
+  private final Shooter m_shooter;
 
   public Draw(Shooter shooter) {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -29,11 +29,13 @@ public class Draw extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_shooter.setMotorSpeed(0);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return m_shooter.getLowerLimit();
   }
 }
