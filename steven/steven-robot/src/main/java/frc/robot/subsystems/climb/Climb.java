@@ -15,14 +15,17 @@ public class Climb extends SubsystemBase {
   public Climb() {
   }
 
+  //heres for people who dont understand for some reason: this gets the state of the arm whether its in or out
   public void getArmState(){
     m_climb.get();
   }
 
+  //extends arm
   public void extendArm(){
     m_climb.set(true);
   }
 
+  //retracts arm
   public void retractArm(){
     m_climb.set(false);
   }
@@ -31,7 +34,7 @@ public class Climb extends SubsystemBase {
     return new InstantCommand(this::extendArm, this);
   }
 
-  public InstantCommand retractArmUp(){
+  public InstantCommand retractArmDown(){
     return new InstantCommand(this::retractArm, this);
   }
 
