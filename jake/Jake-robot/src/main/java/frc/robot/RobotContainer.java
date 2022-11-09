@@ -39,24 +39,31 @@ public class RobotContainer {
     public static final int kClimbOutID = 3;
   }
   // The robot's subsystems and commands are defined here...
+
+  //subsystem
   private Drivetrain m_drivetrain = new Drivetrain();
-  private Joystick m_Joystick = new Joystick(Config.kjoystickID);
-  private ArcadeDrive m_ArcadeDrive = new ArcadeDrive(m_drivetrain, m_Joystick);
   private IntakeArm m_intakeArm = new IntakeArm();
   private Hopper m_hopper = new Hopper();
+  private Shooter m_shooter = new Shooter();
+  private Climb m_climb = new Climb();
+  //Joystick
+  private Joystick m_Joystick = new Joystick(Config.kjoystickID);
+  //button
   private JoystickButton m_intakeIn = new JoystickButton(m_Joystick, Config.kIntakeInID);
   private JoystickButton m_intakeOut = new JoystickButton(m_Joystick, Config.kIntakeOutID);
   private JoystickButton m_armin = new JoystickButton(m_Joystick, Config.kArmInID);
   private JoystickButton m_armOut = new JoystickButton(m_Joystick, Config.kArmOutID);
-  private RunIntake m_runintake = new RunIntake(m_hopper, m_intakeArm, m_intakeIn, m_intakeOut);
-  private Shooter m_shooter = new Shooter();
-  private Launch m_launch = new Launch(m_shooter);
-  private Reload m_reload = new Reload(m_shooter);
   private JoystickButton m_launchButton = new JoystickButton(m_Joystick, Config.kLaunchID);
   private JoystickButton m_reloadButton = new JoystickButton(m_Joystick, Config.kReloadID);
-  private Climb m_climb = new Climb();
   private JoystickButton m_climbOut = new JoystickButton(m_Joystick, Config.kClimbOutID);
   private JoystickButton m_climbIn = new JoystickButton(m_Joystick, Config.kClimbInID);
+  //commands
+  private ArcadeDrive m_ArcadeDrive = new ArcadeDrive(m_drivetrain, m_Joystick);
+  private RunIntake m_runintake = new RunIntake(m_hopper, m_intakeArm, m_intakeIn, m_intakeOut);
+  private Launch m_launch = new Launch(m_shooter);
+  private Reload m_reload = new Reload(m_shooter);
+
+  
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -73,14 +80,21 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
+    //arm in and arm out commands when pressed
+
     m_armin.whenPressed(m_intakeArm.armIn1());
     m_armOut.whenPressed(m_intakeArm.armOut1());
+
+    //launch and reload when pressed
 
     m_launchButton.whenPressed(m_launch);
     m_reloadButton.whenPressed(m_reload);
 
+    // climb in and climb out when pressed
+    
     m_climbOut.whenPressed(m_climb.climbOut1());
-    m_climbOut.whenPressed(m_climb.climbIn1());
+    m_climbIn.whenPressed(m_climb.climbIn1());
   }
 
   /**
