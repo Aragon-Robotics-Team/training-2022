@@ -15,6 +15,7 @@ import frc.robot.commands.shooting.Launch;
 import frc.robot.commands.shooting.Reload;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.climb.Climb;
 import frc.robot.subsystems.intake.Hopper;
 import frc.robot.subsystems.intake.IntakeArm;
 
@@ -34,6 +35,8 @@ public class RobotContainer {
     public static final int k_intakeArmOut = 2;
     public static final int k_reloadButtonId = 7;
     public static final int k_launchButtonId = 8;
+    public static final int k_activateClimbId = 3;
+    public static final int k_deactivateClimbId = 4;
   }
 
   // The robot's subsystems and commands are defined here...
@@ -42,11 +45,14 @@ public class RobotContainer {
   private ArcadeDrive m_arcadedrive = new ArcadeDrive(m_drivetrain, m_joystick);
   private IntakeArm m_IntakeArm = new IntakeArm();
   private Hopper m_hopper = new Hopper();
+  private Climb m_climb = new Climb();
 
   private JoystickButton m_IntakeArmIn = new JoystickButton(m_joystick, Config.k_intakeArmIn);
   private JoystickButton m_IntakeArmOut = new JoystickButton(m_joystick, Config.k_intakeArmOut);
   private JoystickButton m_reloadButton = new JoystickButton(m_joystick, Config.k_reloadButtonId);
   private JoystickButton m_launchButton = new JoystickButton(m_joystick, Config.k_launchButtonId);
+  private JoystickButton m_activateClimbButton = new JoystickButton(m_joystick, Config.k_activateClimbId);
+  private JoystickButton m_deactivateClimbButton = new JoystickButton(m_joystick, Config.k_deactivateClimbId);
   private RunIntake m_RunIntake = new RunIntake(m_hopper, m_IntakeArm, m_IntakeArmIn, m_IntakeArmOut);
 
   private Shooter m_shooter = new Shooter();
@@ -74,6 +80,8 @@ public class RobotContainer {
     m_launchButton.whenPressed(m_launch);
     m_IntakeArmIn.whenPressed(m_IntakeArm.IntakeSetForward());
     m_IntakeArmOut.whenPressed(m_IntakeArm.IntakeSetBack());
+    m_activateClimbButton.whenPressed(m_climb.extendArmUp());
+    m_deactivateClimbButton.whenPressed(m_climb.retractArmUp());
   }
 
   public Command getAutonomousCommand() {
