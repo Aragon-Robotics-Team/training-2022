@@ -5,15 +5,16 @@
 package frc.robot.commands.Shooting;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.subsystems.Shooter;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
 // information, see:
 // https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
 public class Reload extends SequentialCommandGroup {
   /** Creates a new Reload. */
-  public Reload() {
+  public Reload(Shooter shooter) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands();
+    addCommands(new Latch(shooter),new Draw(shooter));
   }
 }

@@ -4,6 +4,7 @@
 
 package frc.robot.commands.shooting;
 
+import edu.wpi.first.wpilibj2.command.PrintCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.Shooter;
 
@@ -16,6 +17,6 @@ public class Reload extends SequentialCommandGroup {
   public Reload(Shooter shooter) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new Latch(shooter), new Draw(shooter));
+    addCommands(new PrintCommand("starting reload"), new Latch(shooter), new PrintCommand("done with latch"), new Draw(shooter), new PrintCommand("done with draw"));
   }
 }

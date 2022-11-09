@@ -13,6 +13,7 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.shooting.Launch;
 import frc.robot.commands.shooting.Reload;
+import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.intake.Hopper;
@@ -30,10 +31,12 @@ public class RobotContainer {
    public static final int kJoystickID = 0;
    public static final int kIntakeArmInID = 1;
    public static final int kIntakeArmOutID = 2;
-   public static final int kIntakeInID = 3;
-   public static final int kIntakeOutID = 4;
+   public static final int kIntakeInID = 10;
+   public static final int kIntakeOutID = 9;
    public static final int kLaunchButtonID = 8;
    public static final int kReloadButtonID = 7;
+   public static final int kClimbInID = 4;
+   public static final int kClimbOutID = 3;
   }
                                                                                                                                                   
   private Joystick m_joystick = new Joystick(Config.kJoystickID);
@@ -53,12 +56,15 @@ public class RobotContainer {
   private Reload m_reload = new Reload(m_shooter);
   private JoystickButton m_launchButton = new JoystickButton(m_joystick, Config.kLaunchButtonID);
   private JoystickButton m_reloadButton = new JoystickButton(m_joystick, Config.kReloadButtonID);
-  
+
+  private Climb m_climbArm = new Climb();
+  private JoystickButton m_climbIn = new JoystickButton(m_joystick, Config.kClimbInID);
+  private JoystickButton m_climbOut = new JoystickButton(m_joystick, Config.kClimbOutID);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
-    
+    configureButtonBindings();
   }
 
   /**
@@ -73,6 +79,10 @@ public class RobotContainer {
 
     m_launchButton.whenPressed(m_launch);
     m_reloadButton.whenPressed(m_reload);
+
+    m_climbIn.whenPressed(m_climbArm.SetArmIn());
+    m_climbOut.whenPressed(m_climbArm.SetArmOut());
+
   }
 
   /**
