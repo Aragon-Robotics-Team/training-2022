@@ -14,6 +14,7 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.Shooting.Launch;
 import frc.robot.commands.Shooting.Reload;
+import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.intake.Hopper;
@@ -34,6 +35,8 @@ public class RobotContainer {
     public static final int kArmOutID = 3;
     public static final int kLaunchID = 8;
     public static final int kReloadID = 7;
+    public static final int kClimbInID = 4;
+    public static final int kClimbOutID = 3;
   }
   // The robot's subsystems and commands are defined here...
   private Drivetrain m_drivetrain = new Drivetrain();
@@ -51,7 +54,9 @@ public class RobotContainer {
   private Reload m_reload = new Reload(m_shooter);
   private JoystickButton m_launchButton = new JoystickButton(m_Joystick, Config.kLaunchID);
   private JoystickButton m_reloadButton = new JoystickButton(m_Joystick, Config.kReloadID);
-
+  private Climb m_climb = new Climb();
+  private JoystickButton m_climbOut = new JoystickButton(m_Joystick, Config.kClimbOutID);
+  private JoystickButton m_climbIn = new JoystickButton(m_Joystick, Config.kClimbInID);
 
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -73,6 +78,9 @@ public class RobotContainer {
 
     m_launchButton.whenPressed(m_launch);
     m_reloadButton.whenPressed(m_reload);
+
+    m_climbOut.whenPressed(m_climb.climbOut1());
+    m_climbOut.whenPressed(m_climb.climbIn1());
   }
 
   /**
