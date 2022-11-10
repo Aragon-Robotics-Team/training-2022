@@ -11,7 +11,11 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.RunIntake;
+import frc.robot.commands.shooting.Launch;
+import frc.robot.commands.shooting.Reload;
+import frc.robot.subsystems.Climb;
 import frc.robot.subsystems.Drivetrain;
+import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.intake.Hopper;
 import frc.robot.subsystems.intake.IntakeArm;
 
@@ -27,7 +31,9 @@ public class RobotContainer {
     public static final int kJoystickButtonIDIntakeOut = 90;
     public static final int kJoystickButtonIDIntakeIn = 99;
     public static final int kJoystickButtonIDIntakeArmIn = 92;
-    public static final int kJoystickButtonIDIntakeArmOut = 95;
+    public static final int kJoystickButtonIDIntakeArmOut = 78;
+    public static int kJoystickButtonIDReload = 7;
+    public static int kJoystickButtonIDLaunch = 8;
   }
   
 
@@ -47,7 +53,15 @@ public class RobotContainer {
   private JoystickButton m_intakeArmOut = new JoystickButton(m_joyStick,Config.kJoystickButtonIDIntakeArmOut);
   private JoystickButton m_intakeArmIn = new JoystickButton(m_joyStick,Config.kJoystickButtonIDIntakeArmIn);
   private RunIntake m_runintake = new RunIntake(m_intakeArm, m_hopper,m_IntakeIn, m_IntakeOut);
-
+  private Shooter m_shooter = new Shooter(); // subsystems
+  private Launch m_launch = new Launch(m_shooter);
+  private Reload m_reload = new Reload(m_shooter);
+  private JoystickButton m_reloadButton = new JoystickButton(m_joyStick,Config.kJoystickButtonIDReload);
+  private JoystickButton m_launchButton = new JoystickButton(m_joyStick,Config. kJoystickButtonIDLaunch );
+  private Climb m_climb = new Climb(); 
+  private JoystickButton m_climbExtendButton = new JoystickButton(m_joyStick, 3);
+  private JoystickButton m_climbRetractButton = new JoystickButton(m_joyStick,4);
+  
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
    * instantiating a {@link GenericHID} or one of its subclasses ({@link
@@ -58,7 +72,11 @@ public class RobotContainer {
   private void configureButtonBindings() {
     m_intakeArmIn.whenPressed(m_intakeArm.SolenoidArmIn());
     m_intakeArmOut.whenPressed(m_intakeArm.SolenoidArmOut());
-  
+    m_reloadButton.whenPressed(m_reload);
+    m_launchButton.whenPressed(m_launch);
+    m_climbExtendButton.whenPressed(m_climb.climbExtend());
+    m_climbRetractButton.whenPressed(m_climb.climbRetact());
+    
   }
 
   /**
