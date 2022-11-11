@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.MoveForTime;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.shooting.Launch;
 import frc.robot.commands.shooting.Reload;
@@ -34,6 +35,8 @@ public class RobotContainer {
     public static final int kJoystickButtonIDIntakeArmOut = 78;
     public static int kJoystickButtonIDReload = 7;
     public static int kJoystickButtonIDLaunch = 8;
+    public static double kAutoSpeed = 0.4;
+    public static double kAutoTime = 3;
   }
   
 
@@ -41,11 +44,6 @@ public class RobotContainer {
   private Joystick m_joyStick =  new Joystick(Config.kjoystickID);
   private Drivetrain m_drivetrain = new Drivetrain();
   private ArcadeDrive m_ArcadeDrive = new ArcadeDrive(m_drivetrain, m_joyStick);
-  /** The container for the robot. Contains subsystems, OI devices, and commands. */
-  public RobotContainer() {
-    // Configure the button bindings
-    configureButtonBindings();
-  }
   private IntakeArm m_intakeArm = new IntakeArm();
   private Hopper m_hopper = new Hopper(); // makes buttons
   private JoystickButton m_IntakeIn = new JoystickButton(m_joyStick, Config.kJoystickButtonIDIntakeIn);
@@ -61,6 +59,13 @@ public class RobotContainer {
   private Climb m_climb = new Climb(); 
   private JoystickButton m_climbExtendButton = new JoystickButton(m_joyStick, 3);
   private JoystickButton m_climbRetractButton = new JoystickButton(m_joyStick,4);
+  private MoveForTime m_MoveForTime = new MoveForTime(m_drivetrain, Config.kAutoTime, Config.kAutoSpeed);
+  /** The container for the robot. Contains subsystems, OI devices, and commands. */
+  public RobotContainer() {
+    // Configure the button bindings
+    configureButtonBindings();
+  }
+  
   
   /**
    * Use this method to define your button->command mappings. Buttons can be created by
@@ -86,7 +91,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-  return null;
+    return m_MoveForTime;
   }
   public Command getTeleopCommand() {
     m_drivetrain.setDefaultCommand(m_ArcadeDrive);
