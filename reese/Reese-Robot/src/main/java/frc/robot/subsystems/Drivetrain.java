@@ -38,7 +38,7 @@ public class Drivetrain extends SubsystemBase {
   }
 
   public void setleftPrimarySpeed(double speed){
-    m_rightPrimaryMotor.set(speed);
+    m_leftPrimaryMotor.set(speed);
   }
 //setting neutral
 public void setIdleeMode(NeutralMode idle){
