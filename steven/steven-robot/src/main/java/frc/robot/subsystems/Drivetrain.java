@@ -50,6 +50,11 @@ public class Drivetrain extends SubsystemBase {
     return m_rightPrimary.getSelectedSensorPosition();
   }
 
+  public void resetEncoders(){
+    m_leftPrimary.setSelectedSensorPosition(0);
+    m_rightPrimary.setSelectedSensorPosition(0);
+  }
+
   @Override
   public void periodic() {
     SmartDashboard.putNumber("LeftEncoderTick", getLeftEncoderTick());
