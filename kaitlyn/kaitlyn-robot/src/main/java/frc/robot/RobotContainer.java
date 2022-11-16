@@ -39,7 +39,7 @@ public class RobotContainer {
    public static final int kClimbInID = 4;
    public static final int kClimbOutID = 3;
    public static final double kSpeed = 0.4;
-   public static final double kTimeInSeconds = 1;
+   public static final double kTimeInSeconds = 3;
   }
   
   //For Drivetrain subsystem
@@ -64,12 +64,12 @@ public class RobotContainer {
   private JoystickButton m_reloadButton = new JoystickButton(m_joystick, Config.kReloadButtonID);
 
   //For Climb subsystem
-  private Climb m_climbArm = new Climb();
+  // private Climb m_climbArm = new Climb();
   private JoystickButton m_climbIn = new JoystickButton(m_joystick, Config.kClimbInID);
   private JoystickButton m_climbOut = new JoystickButton(m_joystick, Config.kClimbOutID);
 
   //For Autonomous Dead Reckoning
-  private MoveForTime m_moveForTime = new MoveForTime(m_drivetrain, Config.kSpeed, Config.kMoveForTime);
+  private MoveForTime m_moveForTime = new MoveForTime(m_drivetrain, Config.kSpeed, Config.kTimeInSeconds);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -90,8 +90,8 @@ public class RobotContainer {
     m_launchButton.whenPressed(m_launch);
     m_reloadButton.whenPressed(m_reload);
 
-    m_climbIn.whenPressed(m_climbArm.SetArmIn());
-    m_climbOut.whenPressed(m_climbArm.SetArmOut());
+    // m_climbIn.whenPressed(m_climbArm.SetArmIn());
+    // m_climbOut.whenPressed(m_climbArm.SetArmOut());
 
   }
 
@@ -102,7 +102,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    return m_moveForTime;
   }
 
   public Command getTeleopCommand(){

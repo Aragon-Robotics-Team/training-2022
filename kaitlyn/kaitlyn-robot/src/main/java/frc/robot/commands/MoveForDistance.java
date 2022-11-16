@@ -4,42 +4,40 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
-public class MoveForTime extends CommandBase {
-  /** Creates a new MoveForTime. */
-  private Drivetrain m_drivetrain;
-  private double m_speed = 0;
-  private double m_timeInSeconds;
-  private Timer m_timer;
+public class MoveForDistance extends CommandBase {
+  /** Creates a new MoveForDistance. */
 
-  public MoveForTime(Drivetrain drivetrain, double speed, double timeInSeconds) {
-    m_timer = new Timer();
-    m_drivetrain = drivetrain;
-    m_speed = speed;
-    m_timeInSeconds = timeInSeconds; 
-    
+  private static final class Config{
+    public static final double kSpeed = 0.4;
+    public static final double kEncoderTicks = 3350;
+  }
+
+  private double m_error;
+  private double m_initialEncoderPosition;
+  private Drivetrain m_drivetrain;
+
+  public MoveForDistance(double distance, Drivetrain drivetrain) {
     // Use addRequirements() here to declare subsystem dependencies.
+    m_error = distance;
+    m_drivetrain = drivetrain;
     addRequirements(m_drivetrain);
-    
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_timer.reset();
-    m_timer.start();
+    m_drivetrain.resetEncoders();
+    m_initialEncoderPosition = m_drivetrain.getLeftEncoderTicks();
+    m_drivetrain.setRightSpeed(Config.kSpeed);
+    m_drivetrain.setLeftSpeed(Config.kSpeed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    m_drivetrain.setRightSpeed(m_speed);
-    m_drivetrain.setLeftSpeed(m_speed);
-
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
@@ -51,6 +49,6 @@ public class MoveForTime extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return m_timer.hasElapsed(m_timeInSeconds);
+    return false;
   }
 }
