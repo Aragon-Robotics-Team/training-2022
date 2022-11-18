@@ -43,7 +43,6 @@ public class RobotContainer {
      private static final double m_speed = 0.4;
      private static final double m_time = 10;
 
-
   
 
   }
@@ -57,7 +56,7 @@ public class RobotContainer {
   private ArcadeDrive m_ArcadeDrive= new ArcadeDrive(m_drivetrain, m_stick);
   private Hopper m_hopper = new Hopper();
   private IntakeArm m_intakeArm = new IntakeArm();
-  private climber m_climber = new climber();
+  // private climber m_climber = new climber();
 
   //Joystick Buttons
   private JoystickButton m_intakeIn = new JoystickButton(m_stick, Config.kInButtonID);
@@ -94,8 +93,8 @@ public class RobotContainer {
     m_armOut.whenPressed(m_intakeArm.ArmOut());
     m_launchButton.whenPressed(m_launch);
     m_reloadButton.whenPressed(m_reload); 
-    m_climberIn.whenPressed(m_climber.climberIn());
-    m_climberOut.whenPressed(m_climber.climberOut());
+    // m_climberIn.whenPressed(m_climber.climberIn());
+    // m_climberOut.whenPressed(m_climber.climberOut());
 
   }
 

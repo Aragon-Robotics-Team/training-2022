@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.MoveForDistance;
 import frc.robot.commands.MoveForTime;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.shooting.Launch;
@@ -37,6 +38,7 @@ public class RobotContainer {
     public static int kJoystickButtonIDLaunch = 8;
     public static double kAutoSpeed = 0.4;
     public static double kAutoTime = 3;
+    public static double kDistance = 1;
   }
   
 
@@ -60,6 +62,7 @@ public class RobotContainer {
   private JoystickButton m_climbExtendButton = new JoystickButton(m_joyStick, 3);
   private JoystickButton m_climbRetractButton = new JoystickButton(m_joyStick,4);
   private MoveForTime m_MoveForTime = new MoveForTime(m_drivetrain, Config.kAutoTime, Config.kAutoSpeed);
+  private MoveForDistance m_MoveForDistance = new MoveForDistance(m_drivetrain, Config.kDistance);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -91,7 +94,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_MoveForTime;
+    return m_MoveForDistance;
   }
   public Command getTeleopCommand() {
     m_drivetrain.setDefaultCommand(m_ArcadeDrive);
