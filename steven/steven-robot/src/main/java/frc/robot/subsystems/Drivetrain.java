@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
@@ -41,8 +42,22 @@ public class Drivetrain extends SubsystemBase {
     m_leftSecondary.setNeutralMode(mode);
   }
 
+  public double getLeftEncoderTick(){
+    return m_leftPrimary.getSelectedSensorPosition();
+  }
+
+  public double getRightEncoderTick(){
+    return m_rightPrimary.getSelectedSensorPosition();
+  }
+
+  public void resetEncoders(){
+    m_leftPrimary.setSelectedSensorPosition(0);
+    m_rightPrimary.setSelectedSensorPosition(0);
+  }
+
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
+    SmartDashboard.putNumber("LeftEncoderTick", getLeftEncoderTick());
+    SmartDashboard.putNumber("RightEncoderTick", getRightEncoderTick());
   }
 }
