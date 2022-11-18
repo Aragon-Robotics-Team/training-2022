@@ -38,7 +38,7 @@ public class RobotContainer {
     public static int kJoystickButtonIDLaunch = 8;
     public static double kAutoSpeed = 0.4;
     public static double kAutoTime = 3;
-    public static double kDistance = 1;
+    public static double kDistance = 4;
   }
   
 
@@ -61,8 +61,8 @@ public class RobotContainer {
   private Climb m_climb = new Climb(); 
   private JoystickButton m_climbExtendButton = new JoystickButton(m_joyStick, 3);
   private JoystickButton m_climbRetractButton = new JoystickButton(m_joyStick,4);
-  private MoveForTime m_MoveForTime = new MoveForTime(m_drivetrain, Config.kAutoTime, Config.kAutoSpeed);
-  private MoveForDistance m_MoveForDistance = new MoveForDistance(m_drivetrain, Config.kDistance);
+  //private MoveForTime m_MoveForTime = new MoveForTime(m_drivetrain, Config.kAutoTime, Config.kAutoSpeed);
+  private MoveForDistance m_MoveForTime = new MoveForDistance(Config.kDistance, m_drivetrain);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -94,7 +94,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_MoveForDistance;
+    return m_MoveForTime;
   }
   public Command getTeleopCommand() {
     m_drivetrain.setDefaultCommand(m_ArcadeDrive);

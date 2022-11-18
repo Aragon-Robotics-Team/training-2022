@@ -7,36 +7,32 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
-
-
 public class MoveForDistance extends CommandBase {
-  /** Creates a new MoveForDistance. */
-
-  private static final class Config{
-    public static final double kMotorSpeed = 0.4;
-    public static final double kEncoderTicks = 33500;
-    public static final double kCircumfrence = (6*Math.PI)/12;
-  }
-
+  public static final class Config{
+    public static final double  k_ticksperRotation = 3350;
+    public static final  double k_speed = 0.4;
+    public static final double k_wheelCircumference  = (6 * Math.PI) / 12;
+  
+  } 
   private Drivetrain m_drivetrain;
-  private double m_error;
-  private double m_intiial;
-  public MoveForDistance(Drivetrain drivetrain, double distance) {
-    // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(drivetrain);
-    m_drivetrain = drivetrain;
-    m_error = distance;
+   /** Creates a new MoveForDistance. */
+  private double m_intialEncoderPostion;
+private double m_error;
 
+  public MoveForDistance(double distance, Drivetrain drivetrain) {
+    m_error = distance;
+    m_drivetrain = drivetrain;
+    // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(m_drivetrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize(){
+  public void initialize() {
     m_drivetrain.resetEncoders();
-    m_intiial = m_drivetrain.getLeftTicks();
-    m_drivetrain.setleftPrimarySpeed(Config.kMotorSpeed);
-    m_drivetrain.setleftPrimarySpeed(Config.kMotorSpeed);
-    
+    m_intialEncoderPostion = m_drivetrain.getRightTicks();
+    m_drivetrain.setleftPrimarySpeed(Config.k_speed);
+    m_drivetrain.setrightPrimarySpeed(Config.k_speed);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -46,15 +42,13 @@ public class MoveForDistance extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_drivetrain.setleftPrimarySpeed(0);
-    m_drivetrain.setrightPrimarySpeed(0);
+   m_drivetrain.setrightPrimarySpeed(0);
+   m_drivetrain.setleftPrimarySpeed(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    double distance = m_drivetrain.getLeftTicks()*(Config.kCircumfrence/Config.kEncoderTicks);
-    return ((m_error-distance) <= 0);
-    
+    return (m_error - (m_drivetrain.getLeftTicks()*(Config.k_wheelCircumference / Config.k_ticksperRotation))) <= 0;
   }
 }

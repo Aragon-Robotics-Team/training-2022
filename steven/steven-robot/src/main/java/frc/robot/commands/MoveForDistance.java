@@ -12,12 +12,14 @@ public class MoveForDistance extends CommandBase {
   private static final class Config {
     public static final double k_tickspRevolution= 3350;
     public static final double k_speed = 0;
+    public static final double k_encoderTF = ((Math.PI * 6)/12) / k_tickspRevolution; 
   }
 
   public Drivetrain m_driveTrain;
 
   private double m_error;
   private double m_initialEncoderPosition;
+  private double m_distance;
   /** Creates a new MoveForDistance. */
   public MoveForDistance(double distance, Drivetrain drivetrain) {
     m_driveTrain = drivetrain;
@@ -35,7 +37,9 @@ public class MoveForDistance extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    m_distance = m_driveTrain.getLeftEncoderTick() * Config.k_encoderTF;
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -46,6 +50,6 @@ public class MoveForDistance extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return (m_error - m_distance) <= 0;
   }
 }
