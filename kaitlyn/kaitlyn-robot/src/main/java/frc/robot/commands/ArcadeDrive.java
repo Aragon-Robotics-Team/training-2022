@@ -4,6 +4,9 @@
 
 package frc.robot.commands;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+import com.revrobotics.CANSparkMax.IdleMode;
+
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
@@ -29,7 +32,7 @@ public class ArcadeDrive extends CommandBase {
     // Use addRequirements() here to declare subsystem dependencies.
 
     m_drivetrain = drivetrain;
-    addRequirements(drivetrain);
+    addRequirements(m_drivetrain);
 
     m_joystick = joystick;
 
@@ -39,6 +42,7 @@ public class ArcadeDrive extends CommandBase {
   // Runs once at the start of the program
   @Override
   public void initialize() {
+    m_drivetrain.setIdleMode(NeutralMode.Coast);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

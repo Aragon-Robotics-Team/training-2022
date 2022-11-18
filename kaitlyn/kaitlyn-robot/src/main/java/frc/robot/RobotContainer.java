@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.MoveForTime;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.shooting.Launch;
 import frc.robot.commands.shooting.Reload;
@@ -37,12 +38,16 @@ public class RobotContainer {
    public static final int kReloadButtonID = 7;
    public static final int kClimbInID = 4;
    public static final int kClimbOutID = 3;
+   public static final double kSpeed = 0.4;
+   public static final double kTimeInSeconds = 3;
   }
-                                                                                                                                                  
+  
+  //For Drivetrain subsystem
   private Joystick m_joystick = new Joystick(Config.kJoystickID);
   private Drivetrain m_drivetrain = new Drivetrain();
   private ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_drivetrain, m_joystick);
 
+  //For IntakeArm subsystem
   private IntakeArm m_intakeArm = new IntakeArm();
   private Hopper m_hopper = new Hopper();
   private JoystickButton m_intakeArmIn = new JoystickButton(m_joystick, Config.kIntakeArmInID);
@@ -51,15 +56,20 @@ public class RobotContainer {
   private JoystickButton m_intakeOut = new JoystickButton (m_joystick, Config.kIntakeOutID);
   private RunIntake m_runIntake = new RunIntake(m_hopper, m_intakeArm, m_intakeIn, m_intakeOut);
 
+  //For Shooter subsystem
   private Shooter m_shooter = new Shooter();
   private Launch m_launch = new Launch(m_shooter);
   private Reload m_reload = new Reload(m_shooter);
   private JoystickButton m_launchButton = new JoystickButton(m_joystick, Config.kLaunchButtonID);
   private JoystickButton m_reloadButton = new JoystickButton(m_joystick, Config.kReloadButtonID);
 
-  private Climb m_climbArm = new Climb();
+  //For Climb subsystem
+  // private Climb m_climbArm = new Climb();
   private JoystickButton m_climbIn = new JoystickButton(m_joystick, Config.kClimbInID);
   private JoystickButton m_climbOut = new JoystickButton(m_joystick, Config.kClimbOutID);
+
+  //For Autonomous Dead Reckoning
+  private MoveForTime m_moveForTime = new MoveForTime(m_drivetrain, Config.kSpeed, Config.kTimeInSeconds);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -80,8 +90,8 @@ public class RobotContainer {
     m_launchButton.whenPressed(m_launch);
     m_reloadButton.whenPressed(m_reload);
 
-    m_climbIn.whenPressed(m_climbArm.SetArmIn());
-    m_climbOut.whenPressed(m_climbArm.SetArmOut());
+    // m_climbIn.whenPressed(m_climbArm.SetArmIn());
+    // m_climbOut.whenPressed(m_climbArm.SetArmOut());
 
   }
 
@@ -92,7 +102,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    return m_moveForTime;
   }
 
   public Command getTeleopCommand(){
