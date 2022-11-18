@@ -4,6 +4,8 @@
 
 package frc.robot.commands;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
+
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
@@ -11,8 +13,8 @@ public class MoveForDistance extends CommandBase {
   /** Creates a new MoveForDistance. */
 
   private static final class Config{
-    public static final double kSpeed = 0.4;
-    public static final double kEncoderTicks = 3350;
+    public static final double kSpeed = 0.2;
+    public static final double kEncoderTicks = 33500;
     public static final double kWheelCircumference = 6*Math.PI/12;
   }
 
@@ -50,6 +52,6 @@ public class MoveForDistance extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return ((m_error - (m_drivetrain.getLeftEncoderTicks()*(Config.kWheelCircumference/Config.kEncoderTicks)))k <= 0);
+    return ((m_error - (m_drivetrain.getLeftEncoderTicks()*(Config.kWheelCircumference/Config.kEncoderTicks))) <= 0);
   }
 }
