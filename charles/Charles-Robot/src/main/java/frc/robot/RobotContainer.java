@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.MoveForDistance;
 import frc.robot.commands.MoveForTime;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.shooting.Launch;
@@ -40,8 +41,9 @@ public class RobotContainer {
      public static final int kReloadButtonID = 7;
      public static final int kclimberOutID = 3;
      public static final int kclimberInID = 4;
-     private static final double m_speed = 0.4;
-     private static final double m_time = 10;
+     private static final double kspeed = 0.4;
+     private static final double ktime = 10;
+     public static final double kDistance = 1;
 
   
 
@@ -72,7 +74,8 @@ public class RobotContainer {
   private Shooter m_shooter = new Shooter();
   private Launch m_launch = new Launch(m_shooter);
   private Reload m_reload = new Reload(m_shooter);
-  private MoveForTime m_MoveForTime = new MoveForTime(m_drivetrain, Config.m_speed, Config.m_time);
+  private MoveForTime m_MoveForTime = new MoveForTime(m_drivetrain, Config.kspeed, Config.ktime);
+  private MoveForDistance m_MoveForDistance = new MoveForDistance(m_drivetrain, Config.kDistance);
   public RobotContainer() {
     // Configure the button bindings
     configureButtonBindings();
@@ -104,7 +107,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand(){
-    return m_MoveForTime;
+    return m_MoveForDistance;
   }
   public Command getTeleopCommand(){
     m_drivetrain.setDefaultCommand(m_ArcadeDrive);
