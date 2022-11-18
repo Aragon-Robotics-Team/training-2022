@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.MoveForDistance;
 import frc.robot.commands.MoveForTime;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.shooting.Launch;
@@ -40,6 +41,7 @@ public class RobotContainer {
    public static final int kClimbOutID = 3;
    public static final double kSpeed = 0.4;
    public static final double kTimeInSeconds = 3;
+   public static final double kDistance = 4;
   }
   
   //For Drivetrain subsystem
@@ -69,7 +71,12 @@ public class RobotContainer {
   private JoystickButton m_climbOut = new JoystickButton(m_joystick, Config.kClimbOutID);
 
   //For Autonomous Dead Reckoning
-  private MoveForTime m_moveForTime = new MoveForTime(m_drivetrain, Config.kSpeed, Config.kTimeInSeconds);
+  //private MoveForTime m_moveForTime = new MoveForTime(m_drivetrain, Config.kSpeed, Config.kTimeInSeconds);
+
+  //For Autonomous Bang Bang Control
+  private MoveForDistance m_moveForDistance = new MoveForDistance(Config.kDistance, m_drivetrain);
+
+
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -102,7 +109,8 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_moveForTime;
+    //return m_moveForTime; (For Dead Reckoning)
+    return m_moveForDistance;
   }
 
   public Command getTeleopCommand(){
