@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.MoveForDistance;
 import frc.robot.commands.MoveForTime;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.shooting.Launch;
@@ -41,6 +42,7 @@ public class RobotContainer {
     public static final int k_deactivateClimbId = 4;
     public static final double k_speed = 0.4;
     public static final double k_time = 9;
+    public static final double k_distance = 4.999999;
   }
 
   // subsystems
@@ -67,6 +69,7 @@ public class RobotContainer {
   private ArcadeDrive m_arcadedrive = new ArcadeDrive(m_drivetrain, m_joystick);
   private RunIntake m_RunIntake = new RunIntake(m_hopper, m_IntakeArm, m_IntakeArmIn, m_IntakeArmOut);
   private MoveForTime m_moveforetime = new MoveForTime(m_drivetrain, Config.k_speed, Config.k_time);
+  private MoveForDistance m_movefordistance = new MoveForDistance(Config.k_distance, m_drivetrain);
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -89,7 +92,7 @@ public class RobotContainer {
   }
 
   public Command getAutonomousCommand() {
-    return m_moveforetime;
+    return m_movefordistance;
   }
 
   public Command getTeleopCommand() {
