@@ -11,6 +11,7 @@ public class MoveForDistance extends CommandBase {
   public static final class Config{
     public static final double  k_ticksperRotation = 3350;
     public static final  double k_speed = 0.4;
+    public static final double k_wheelCircumference  = (6 * Math.PI) / 12;
   
   } 
   private Drivetrain m_drivetrain;
@@ -48,6 +49,6 @@ private double m_error;
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return (m_error - (m_drivetrain.getLeftTicks()*(Config.k_wheelCircumference / Config.k_ticksperRotation))) <= 0;
   }
 }
