@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Drivetrain extends SubsystemBase {
@@ -27,6 +28,12 @@ public class Drivetrain extends SubsystemBase {
   // secondary motor
   private WPI_TalonFX m_leftSecondaryMotor = new WPI_TalonFX(Config.kLeftSecondaryMotorID);
 
+  private DifferentialDrive m_differentialDrive = new DifferentialDrive(m_rightPrimaryMotor,m_leftPrimaryMotor);
+
+  public DifferentialDrive getDrive() {
+    return m_differentialDrive;
+  }
+
   public Drivetrain() {
     m_leftSecondaryMotor.follow(m_leftPrimaryMotor);
     m_rightSecondaryMotor.follow(m_rightPrimaryMotor);
@@ -46,6 +53,18 @@ public class Drivetrain extends SubsystemBase {
     m_rightSecondaryMotor.setNeutralMode(mode);
     m_leftPrimaryMotor.setNeutralMode(mode);
     m_leftSecondaryMotor.setNeutralMode(mode);
+  }
+  public double getLeftTicks(){
+    return m_leftPrimaryMotor.getSelectedSensorPosition();
+  }
+
+  public double getRightTicks(){
+    return m_rightPrimaryMotor.getSelectedSensorPosition();
+  }
+
+  public void resetEncoders(){
+    m_leftPrimaryMotor.setSelectedSensorPosition(0);
+    m_rightPrimaryMotor.setSelectedSensorPosition(0);
   }
 
   @Override

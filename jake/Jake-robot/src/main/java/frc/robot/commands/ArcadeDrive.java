@@ -42,25 +42,28 @@ public class ArcadeDrive extends CommandBase {
 
     // Speed Made
 
-    double left = speed + turn;
+    m_drivetrain.getDrive().arcadeDrive(speed, turn, true);
 
-    //Left speed
+    
+    // double left = speed + turn;
 
-    double right = speed - turn;
+    // //Left speed
 
-    //Right speed
+    // double right = speed - turn;
 
-    m_drivetrain.setRightSpeed(right); 
+    // //Right speed
 
-    //Setting right speed
+    // m_drivetrain.setRightSpeed(right); 
 
-    m_drivetrain.setLeftSpeed(left);
+    // //Setting right speed
+
+    // m_drivetrain.setLeftSpeed(left);
 
     //Setting left speed
   
-    // Made Speed and Turn Multipliers
-    SmartDashboard.putNumber("left speed", left);
-    SmartDashboard.putNumber("right speed", right);
+    // // Made Speed and Turn Multipliers
+    // SmartDashboard.putNumber("left speed", left);
+    // SmartDashboard.putNumber("right speed", right);
   }
 
   // Called once the command ends or is interrupted.
