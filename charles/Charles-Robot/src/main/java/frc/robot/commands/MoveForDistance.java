@@ -23,9 +23,9 @@ public class MoveForDistance extends CommandBase {
   private double m_intiial;
   public MoveForDistance(Drivetrain drivetrain, double distance) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(drivetrain);
     m_drivetrain = drivetrain;
     m_error = distance;
+    addRequirements(drivetrain);
 
   }
 
