@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -12,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.MoveForDistance;
 import frc.robot.commands.MoveForTime;
+import frc.robot.commands.MoveWithPID;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.shooting.Launch;
 import frc.robot.commands.shooting.Reload;
@@ -39,6 +41,8 @@ public class RobotContainer {
     public static double kAutoSpeed = 0.4;
     public static double kAutoTime = 3;
     public static double kDistance = 4;
+    public static double kSetPoint = 10;
+
   }
   
 
@@ -62,6 +66,7 @@ public class RobotContainer {
   private JoystickButton m_climbExtendButton = new JoystickButton(m_joyStick, 3);
   private JoystickButton m_climbRetractButton = new JoystickButton(m_joyStick,4);
   //private MoveForTime m_MoveForTime = new MoveForTime(m_drivetrain, Config.kAutoTime, Config.kAutoSpeed);
+  private MoveWithPID m_MoveWithPID = new MoveWithPID(m_drivetrain, Config.kSetPoint);
   private MoveForDistance m_MoveForTime = new MoveForDistance(Config.kDistance, m_drivetrain);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -94,7 +99,7 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_MoveForTime;
+    return m_MoveWithPID;
   }
   public Command getTeleopCommand() {
     m_drivetrain.setDefaultCommand(m_ArcadeDrive);
