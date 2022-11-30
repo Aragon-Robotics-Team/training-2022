@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -13,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.MoveForDistance;
 import frc.robot.commands.MoveForTime;
+import frc.robot.commands.MoveWithPID;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.shooting.Launch;
 import frc.robot.commands.shooting.Reload;
@@ -43,6 +45,7 @@ public class RobotContainer {
    public static final double kSpeed = 0.2;
    public static final double kTimeInSeconds = 3;
    public static final double kDistance = 1;
+   public static final double kSetpoint = 10;
   }
   
   //For Drivetrain subsystem
@@ -80,6 +83,9 @@ public class RobotContainer {
   //For Autonomous Shooter and moving
   private SequentialCommandGroup m_autoSequence = new SequentialCommandGroup(m_reload, m_launch, m_moveForTime);
 
+  //For Autonomous PID
+  private MoveWithPID m_moveWithPID = new MoveWithPID(m_drivetrain, Config.kSetpoint);
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -111,9 +117,10 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoSequence; 
+    return m_moveWithPID; 
     //return m_moveForTime; (For Dead Reckoning)
-    //return m_moveForDistance;
+    //return m_moveForDistance; (For Bang Bang)
+    //return m_autoSequence; (For Shooter + Bang Bang)
   }
 
   public Command getTeleopCommand(){

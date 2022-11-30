@@ -7,6 +7,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
 
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -25,6 +26,9 @@ public class Drivetrain extends SubsystemBase {
  private WPI_TalonFX m_leftPrimary = new WPI_TalonFX(Config.kLeftPrimaryMotorID);
  private WPI_TalonFX m_rightSecondary = new WPI_TalonFX(Config.kRightSecondaryMotorID);
  private WPI_TalonFX m_leftSecondary = new WPI_TalonFX (Config.kLeftSecondaryMotorID);
+
+ //For differential drive
+ private DifferentialDrive m_differentialDrive = new DifferentialDrive(m_leftPrimary, m_rightPrimary);
 
  public Drivetrain() {
 
@@ -75,11 +79,17 @@ public void setRightSpeed(double rightSpeed) {
     m_leftPrimary.setSelectedSensorPosition(0);
     m_rightPrimary.setSelectedSensorPosition(0);
   }
+
+  public DifferentialDrive getDrive(){
+    return m_differentialDrive;
+  }
   
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
     SmartDashboard.putNumber("Left Encoder Ticks", getLeftEncoderTicks());
     SmartDashboard.putNumber("Right Encoder Ticks", getRightEncoderTicks());
+
+    SmartDashboard.putData(m_differentialDrive);
   }
 }
