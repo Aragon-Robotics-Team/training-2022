@@ -51,14 +51,16 @@ public class ArcadeDrive extends CommandBase {
     double turn = m_joystick.getRawAxis(Config.kRightStickX)*Config.kTurnMultiplier;
     double speed = m_joystick.getRawAxis(Config.kLeftStickY)*Config.kSpeedMultiplier;
 
-    double left = speed + turn;
-    double right = speed - turn;
+    //double left = speed + turn;
+    //double right = speed - turn;
     
-    m_drivetrain.setRightSpeed(right);
-    m_drivetrain.setLeftSpeed(left);
+    //m_drivetrain.setRightSpeed(right);
+    //m_drivetrain.setLeftSpeed(left);
 
-    SmartDashboard.putNumber("left speed", left);
-    SmartDashboard.putNumber("right speed", right);
+    //SmartDashboard.putNumber("left speed", left);
+    //SmartDashboard.putNumber("right speed", right);
+
+    m_drivetrain.getDrive().arcadeDrive(speed,turn,true);
 
   }
 
@@ -73,8 +75,10 @@ public class ArcadeDrive extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     
-    m_drivetrain.setRightSpeed(0);
-    m_drivetrain.setLeftSpeed(0);
+    //m_drivetrain.setRightSpeed(0);
+    //m_drivetrain.setLeftSpeed(0);
+    m_drivetrain.getDrive().arcadeDrive(0.0,0.0);
+    
   }
 
 }
