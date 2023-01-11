@@ -37,22 +37,24 @@ public class ArcadeDrive extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double speed = m_joyStick.getRawAxis(Config.kLeftStickYAxis) * Config.kSpeedMultiplier;
-    double turn = m_joyStick.getRawAxis(Config.kRightStickYAxis) * Config.kTurnMultiplier;
-    double left = speed - turn;
-    double right = speed + turn;
-    m_drivetrain.setrightPrimarySpeed(right);
-    m_drivetrain.setleftPrimarySpeed(left);
-  SmartDashboard.putNumber("left speed", left);
-  SmartDashboard.putNumber("right speed", right);
+  double speed = m_joyStick.getRawAxis(Config.kLeftStickYAxis) * Config.kSpeedMultiplier;
+  double turn = m_joyStick.getRawAxis(Config.kRightStickYAxis) * Config.kTurnMultiplier;
+    //double left = speed - turn;
+    //double right = speed + turn;
+    //m_drivetrain.setrightPrimarySpeed(right);
+    //m_drivetrain.setleftPrimarySpeed(left);
+  //SmartDashboard.putNumber("left speed", left);
+  //SmartDashboard.putNumber("right speed", right);
+  m_drivetrain.getDrive().arcadeDrive(speed, turn, true);
   }
 
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_drivetrain.setrightPrimarySpeed(0);
-    m_drivetrain.setleftPrimarySpeed(0);
+    //m_drivetrain.setrightPrimarySpeed(0);
+    //m_drivetrain.setleftPrimarySpeed(0);
+    m_drivetrain.getDrive().arcadeDrive(0.0, 0.0);
   }
 
   // Returns true when the command should end.
