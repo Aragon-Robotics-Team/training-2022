@@ -10,7 +10,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.ArcadeDrive;
-        
+import frc.robot.commands.MoveForDistance;
+import frc.robot.commands.MoveForTime;
+import frc.robot.commands.MoveWithPID;
 import frc.robot.commands.RunIntake;
 import frc.robot.commands.Shooting.Launch;
 import frc.robot.commands.Shooting.Reload;
@@ -37,6 +39,10 @@ public class RobotContainer {
     public static final int kReloadID = 7;
     public static final int kClimbInID = 4;
     public static final int kClimbOutID = 3;
+    public static final double kspeed = 0.4;
+    public static final double ktime = 0;
+    public static final double kdistance = 1;
+    public static final double kSetPoint = 10;
   }
   // The robot's subsystems and commands are defined here...
 
@@ -62,7 +68,9 @@ public class RobotContainer {
   private RunIntake m_runintake = new RunIntake(m_hopper, m_intakeArm, m_intakeIn, m_intakeOut);
   private Launch m_launch = new Launch(m_shooter);
   private Reload m_reload = new Reload(m_shooter);
-
+  private MoveForTime m_MoveForTime = new MoveForTime(m_drivetrain, Config.kspeed, Config.ktime);
+  private MoveForDistance m_MoveForDistance = new MoveForDistance(m_drivetrain, Config.kdistance);
+  private MoveWithPID m_MoveWithPID = new MoveWithPID(Config.kSetPoint, m_drivetrain);
   
 
 
@@ -103,7 +111,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    return null;
+    return m_MoveWithPID;
   }
 
   public Command getTeleopCommand(){
